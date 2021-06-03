@@ -53,5 +53,5 @@ resource "google_storage_bucket" "vault" {
 
   force_destroy = var.storage_bucket_force_destroy
 
-  depends_on = [google_project_service.service]
+  #depends_on = [google_project_service.service]
 }
