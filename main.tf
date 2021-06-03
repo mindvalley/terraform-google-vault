@@ -48,7 +48,7 @@ resource "google_service_account" "vault-admin" {
   display_name = "Vault Admin"
   project      = var.project_id
 
-  depends_on = [google_project_service.service]
+  # depends_on = [google_project_service.service]
 }
 
 module "cluster" {

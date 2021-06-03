@@ -39,7 +39,7 @@ resource "google_compute_address" "vault_ilb" {
   name         = "vault-ilb"
   address_type = "INTERNAL"
 
-  depends_on = [google_project_service.service]
+  # depends_on = [google_project_service.service]
 }
 
 # Create a NAT router so the nodes can reach the public Internet
@@ -85,7 +85,7 @@ resource "google_compute_network" "vault-network" {
   name                    = "vault-network"
   auto_create_subnetworks = false
 
-  depends_on = [google_project_service.service]
+  # depends_on = [google_project_service.service]
 }
 
 resource "google_compute_subnetwork" "vault-subnet" {
@@ -98,7 +98,7 @@ resource "google_compute_subnetwork" "vault-subnet" {
   network                  = local.network
   private_ip_google_access = true
 
-  depends_on = [google_project_service.service]
+  # depends_on = [google_project_service.service]
 }
 
 resource "google_compute_address" "vault" {
@@ -108,7 +108,7 @@ resource "google_compute_address" "vault" {
   name   = "vault-lb"
   region = var.region
 
-  depends_on = [google_project_service.service]
+  # depends_on = [google_project_service.service]
 }
 
 # Data source for list of google IPs
@@ -133,7 +133,7 @@ resource "google_compute_firewall" "allow-lb-healthcheck" {
 
   target_tags = ["allow-vault"]
 
-  depends_on = [google_project_service.service]
+  # depends_on = [google_project_service.service]
 }
 
 # Allow any user-defined CIDRs to talk to the Vault instances.
@@ -151,7 +151,7 @@ resource "google_compute_firewall" "allow-external" {
 
   target_tags = ["allow-vault"]
 
-  depends_on = [google_project_service.service]
+  # depends_on = [google_project_service.service]
 }
 
 # Allow Vault nodes to talk internally on the Vault ports.
@@ -167,7 +167,7 @@ resource "google_compute_firewall" "allow-internal" {
 
   source_ranges = [var.network_subnet_cidr_range]
 
-  depends_on = [google_project_service.service]
+  # depends_on = [google_project_service.service]
 }
 
 # Allow SSHing into machines tagged "allow-ssh"
@@ -185,6 +185,6 @@ resource "google_compute_firewall" "allow-ssh" {
   source_ranges = var.ssh_allowed_cidrs
   target_tags   = ["allow-ssh"]
 
-  depends_on = [google_project_service.service]
+  # depends_on = [google_project_service.service]
 }
 
