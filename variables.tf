@@ -497,7 +497,7 @@ variable "vault_ui_enabled" {
 
 variable "vault_version" {
   type    = string
-  default = "1.7.0"
+  default = "1.8.2"
 
   description = "Version of vault to install. This version must be 1.0+ and must be published on the HashiCorp releases service."
 
